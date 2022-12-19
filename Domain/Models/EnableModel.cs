@@ -1,6 +1,6 @@
-﻿namespace Application.Command
+﻿namespace Domain.Models
 {
-    public class EnableCommand
+    public class EnableModel
     {
         public int Id { get; set; }
         public bool Enabled { get; set; }
