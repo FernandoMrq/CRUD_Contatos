@@ -7,8 +7,8 @@ namespace Application.Application
     {
         public Task<IEnumerable<ContactDto>> GetAllValids();
         public Task<bool> Create(ContactCommand command);
-        public Task<bool> Get(int id);
+        public Task<ContactDto> Get(int id);
         public Task<bool> Delete(int id);
-        public Task<bool> Deactive(int id);
+        public Task<bool> Enable(EnableCommand command);
     }
 }

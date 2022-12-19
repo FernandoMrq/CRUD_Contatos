@@ -32,16 +32,16 @@ namespace Api.Controllers
             return Ok(await _application.Get(id));
         }
 
-        [HttpPut("{id}", Name = "delete")]
+        [HttpDelete("{id}", Name = "delete")]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await _application.Delete(id));
         }
 
-        [HttpDelete("{id}", Name = "deactive")]
-        public async Task<IActionResult> Deactive(int id)
+        [HttpPut(Name = "deactive")]
+        public async Task<IActionResult> Enable([FromBody] EnableCommand command)
         {
-            return Ok(await _application.Deactive(id));
+            return Ok(await _application.Enable(command));
         }
     }
 }
