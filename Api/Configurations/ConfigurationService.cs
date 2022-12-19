@@ -1,4 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Application.Application;
+using Business;
+using Domain.Adapter;
+using Domain.Business;
+using Repository;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Api.Configurations
 {
@@ -7,42 +12,19 @@ namespace Api.Configurations
     {
         public static IServiceCollection AddAplications(this IServiceCollection services)
         {
+            services.AddTransient<IContactApplication, ContactApplication>();
             return services;
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddTransient<IContactAdapter, ContactAdapter>();
             return services;
         }
 
         public static IServiceCollection AddBusiness(this IServiceCollection services)
         {
-            return services;
-        }
-
-        public static IServiceCollection AddRules(this IServiceCollection services)
-        {
-            return services;
-        }
-
-        public static IServiceCollection AddExternalServices(this IServiceCollection services, IConfiguration configuration)
-        {
-
-            return services;
-        }
-
-        public static IServiceCollection AddInfra(this IServiceCollection services)
-        {
-            return services;
-        }
-
-        public static IServiceCollection AddCache(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services;
-        }
-
-        public static IServiceCollection AddConsumers(this IServiceCollection services)
-        {
+            services.AddTransient<IContactBusiness, ContactBusiness>();
             return services;
         }
     }

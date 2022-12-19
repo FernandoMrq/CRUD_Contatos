@@ -1,4 +1,6 @@
-﻿using Domain.Business;
+﻿using AutoMapper;
+using Domain.Adapter;
+using Domain.Business;
 using Domain.Entities;
 using Domain.Models;
 
@@ -6,29 +8,56 @@ namespace Business
 {
     public class ContactBusiness : IContactBusiness
     {
-        public Task<bool> Create(ContactModel contact)
+        private readonly IContactAdapter _contactAdapter;
+        private readonly IMapper _mapper;
+
+        public ContactBusiness(IContactAdapter contactAdapter, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _contactAdapter = contactAdapter;
+            _mapper = mapper;
+        }
+
+        public Task<bool> Create(ContactModel contactModel)
+        {
+            if (!(contactModel.Validate()))
+                throw new Exception("Incorrect birthdey");
+
+            var contac = _mapper.Map<Contact>(contactModel);
+
+            return _contactAdapter.Add(contac);
         }
 
         public Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            return _contactAdapter.Delete(id);
         }
 
-        public Task<bool> Enable(EnableModel enable)
+        public async Task<bool> Enable(EnableModel enableModel)
         {
-            throw new NotImplementedException();
+            var enable = _mapper.Map<Enable>(enableModel);
+
+            var contact = await Get(enable.Id);
+
+            contact.Enable = enable.Enabled;
+
+            return await _contactAdapter.Update(contact);
         }
 
-        public Task<Contact> Get(int id)
+        public async Task<Contact> Get(int id)
         {
-            throw new NotImplementedException();
+            var contact = await _contactAdapter.Get(id);
+
+            if (contact.Enable)
+                return contact;
+
+            return null;
         }
 
-        public Task<List<ContactModel>> GetAllValids()
+        public async Task<List<Contact>> GetAllValids()
         {
-            throw new NotImplementedException();
+            var list = await _contactAdapter.GetList();
+
+            return list.Where(contact => contact.Enable).ToList();
         }
     }
 }

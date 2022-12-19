@@ -10,6 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddContext(configuration);
+builder.Services.AddAplications();
+builder.Services.AddRepositories();
+builder.Services.AddBusiness();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
