@@ -1,3 +1,5 @@
+using Application.Application;
+using Application.Command;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -6,43 +8,40 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class Contacts : ControllerBase
     {
-        public Contacts()
+        private readonly IContactApplication _application;
+        public Contacts(IContactApplication application)
         {
+            _application = application;
         }
 
         [HttpGet(Name = "get-contacts")]
-        public Task<IActionResult> GetAllValids()
+        public async Task<IActionResult> GetAllValids()
         {
-            return default;
-            //return Ok();
+            return Ok(await _application.GetAllValids());
         }
 
         [HttpPost(Name = "create-contact")]
-        public Task<IActionResult> Create([FromBody] object contact)
+        public async Task<IActionResult> Create([FromBody] ContactCommand command)
         {
-            return default;
-            //return Ok();
+            return Ok(await _application.Create(command));
         }
 
         [HttpGet("{id}", Name = "get-contact")]
-        public Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return default;
-            //return Ok();
+            return Ok(await _application.Get(id));
         }
 
         [HttpPut("{id}", Name = "delete")]
-        public Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return default;
-            //return Ok();
+            return Ok(await _application.Delete(id));
         }
 
         [HttpDelete("{id}", Name = "deactive")]
-        public Task<IActionResult> Deactive(int id)
+        public async Task<IActionResult> Deactive(int id)
         {
-            return default;
-            //return Ok();
+            return Ok(await _application.Deactive(id));
         }
     }
 }
