@@ -32,7 +32,7 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}", Name = "delete")]
-        public Task<IActionResult> Remove(int id)
+        public Task<IActionResult> Delete(int id)
         {
             return default;
             //return Ok();
