@@ -6,5 +6,6 @@
         public DateTime Birthday { get; set; }
         public GenderDto Gender { get; set; }
         public int Age { get; set; }
+        public bool Enable { get; set; }
     }
 }

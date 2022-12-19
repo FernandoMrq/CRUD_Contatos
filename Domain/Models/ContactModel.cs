@@ -5,5 +5,6 @@
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
         public GenderModel Gender { get; set; }
+        public bool Enable { get; set; }
     }
 }
