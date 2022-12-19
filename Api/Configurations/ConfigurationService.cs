@@ -45,10 +45,5 @@ namespace Api.Configurations
         {
             return services;
         }
-
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
-        {
-            return services;
-        }
     }
 }
