@@ -5,10 +5,12 @@ namespace Api.Configurations
 {
     public static class ConfigureDatabase
     {
-        public static void ConfigureDatabaseServices(IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connection = configuration.GetConnectionString("ContactConnection");
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+
+            return services;
         }
     }
 }

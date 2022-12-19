@@ -27,6 +27,7 @@ namespace Api.Configurations
 
         public static IServiceCollection AddExternalServices(this IServiceCollection services, IConfiguration configuration)
         {
+
             return services;
         }
 
@@ -47,8 +48,6 @@ namespace Api.Configurations
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
-            services.AddSwaggerGen();
-
             return services;
         }
     }
